@@ -1,0 +1,17 @@
+{
+  "name": "skilld-extension",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build"
+  },
+  "dependencies": {
+    "@skilld/shared-types": "file:../../packages/shared-types"
+  },
+  "devDependencies": {
+    "@crxjs/vite-plugin": "^2.0.0-beta.23",
+    "typescript": "^5.2.2",
+    "vite": "^5.2.0"
+  }
+}
