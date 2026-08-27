@@ -1,16 +1,25 @@
 # skilld
 
-skilld watches what you're typing into Claude or ChatGPT and suggests the right "skill" file to inject — pulled from skills.sh, curated GitHub repos, or your own local library — so you're not manually hunting down and pasting SKILL.md files every time.
+Browser extension + Mac menubar app that suggests and injects the right
+AI skill (from skills.sh, GitHub, or your own library) into Claude/
+ChatGPT before you hit send — plus a local skill manager for Claude Code
+and a built-in prompt clarifier.
 
-The Mac menubar companion app manages your local skill collection (install, update, remove) for tools like Claude Code that read skills straight from disk.
+## Start here
+- `PRD.md` — what we're building, for whom, v1 scope.
+- `ARCHITECTURE.md` — how the three apps and backend fit together.
+- `ROADMAP.md` — build order and exit criteria per phase.
+- `AGENTS.md` — rules for AI coding agents (Cursor/Antigravity) working
+  in this repo. Read this before generating code here.
 
-Features:
-- Auto-suggest the most relevant skill while typing on supported sites.
-- Pull skills from skills.sh, curated GitHub repos, or your own local library.
-- Manage installed skills from the Mac menubar companion app.
-- Install, update, and remove skills with ease.
-- Toggle auto-suggest on or off per site.
-- Preview a skill before injecting it.
-- Use the built-in prompt clarifier to tighten up your message before it goes out.
+## Repo layout
+```
+apps/backend      FastAPI service
+apps/menubar      SwiftUI macOS app
+apps/extension    Manifest V3 browser extension
+packages/shared-types   Shared TS types
+```
 
-skilld is designed to streamline your workflow by making skill injection seamless and context-aware, saving time and reducing manual effort.
+## Local dev
+See each app's own README under `apps/<name>/README.md` once scaffolded.
+Root `docker-compose.yml` runs backend + Postgres + Redis together.
