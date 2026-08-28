@@ -5,6 +5,8 @@ AI skill (from skills.sh, GitHub, or your own library) into Claude/
 ChatGPT before you hit send — plus a local skill manager for Claude Code
 and a built-in prompt clarifier.
 
+![Architecture Diagram](docs/skilld_architecture_hld.png)
+
 ## Start here
 - `PRD.md` — what we're building, for whom, v1 scope.
 - `ARCHITECTURE.md` — how the three apps and backend fit together.
