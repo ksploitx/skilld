@@ -40,8 +40,10 @@ dumb and swappable, and so scraping/rate-limits live in one place.
 ### apps/menubar (SwiftUI, macOS)
 - Calls backend `/skills` to list/search.
 - Installs a skill by writing its raw_content to
-  `~/.claude/skills/<skill-name>/SKILL.md` (confirm exact path Claude
-  Code expects before wiring this).
+  `~/.claude/skills/<skill-name>/SKILL.md` — confirmed as the personal
+  (global) skills path Claude Code reads on macOS. No restart needed;
+  Claude Code watches the directory for changes live. See
+  `docs/CLAUDE_CODE_SKILLS.md` for full convention details.
 - Tracks installed state locally (simple local JSON manifest of
   installed skill ids + versions, not synced to backend in v1).
 - Native AppKit/SwiftUI only — no cross-platform framework, since
