@@ -25,7 +25,8 @@ struct ContentView: View {
                     Text(skill.description).font(.caption).foregroundColor(.secondary)
 
                     Button("Install") {
-                        // TODO: file operation to install to ~/.claude/skills/ will go here
+                        // TODO: write skill.raw_content to ~/.claude/skills/<name>/SKILL.md
+                        // See docs/CLAUDE_CODE_SKILLS.md for exact path, structure, and naming rules
                         print("Installing \(skill.name)")
                     }
                     .padding(.top, 2)
