@@ -1,0 +1,423 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		116147674D439DF5F172C5D0 /* SkillStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0405D29FFB3531A00EDBDDE /* SkillStore.swift */; };
+		1C40A887AAC705202B94D6D0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01653FEB768E5C91E7A3816B /* ContentView.swift */; };
+		45035423532D93892D79D13E /* SkillInstallerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E904479BAEC025BA560ED9 /* SkillInstallerTests.swift */; };
+		4DDB696D46DF3D415415D8B7 /* SkillEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C58276535ACB2E191839CD4 /* SkillEntry.swift */; };
+		6D6BEC14DB916BC216A08B69 /* skilldApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FA577D72B7B00C59E79AE0 /* skilldApp.swift */; };
+		F75EADCFA707951C92CFF310 /* SkillInstaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8C59A11E6091C02A10981F7 /* SkillInstaller.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F3DF5A9B4F1735110FDED11B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 275314F1D196ABB6C9CF9B0E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BBB17B17F4DC1A332658E717;
+			remoteInfo = skilld;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		01653FEB768E5C91E7A3816B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		18FA577D72B7B00C59E79AE0 /* skilldApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = skilldApp.swift; sourceTree = "<group>"; };
+		1C58276535ACB2E191839CD4 /* SkillEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillEntry.swift; sourceTree = "<group>"; };
+		37E904479BAEC025BA560ED9 /* SkillInstallerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillInstallerTests.swift; sourceTree = "<group>"; };
+		7103E716697CED657F0FE19C /* skilld.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = skilld.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A0405D29FFB3531A00EDBDDE /* SkillStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillStore.swift; sourceTree = "<group>"; };
+		AB0BE8B57985754186A7B706 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		B8C59A11E6091C02A10981F7 /* SkillInstaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillInstaller.swift; sourceTree = "<group>"; };
+		CCE1E2AEDCD3511BC55B1C25 /* skilldTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = skilldTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D9FB78EF852B2564B34DCD37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		16CDC511C1B30C69A8E66269 = {
+			isa = PBXGroup;
+			children = (
+				1F933E6534E9192CB170FFED /* skilld */,
+				E508D45C6D86C28799D0B22C /* skilldTests */,
+				A52633CA7F7F3BDE01D8CDDD /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1F933E6534E9192CB170FFED /* skilld */ = {
+			isa = PBXGroup;
+			children = (
+				01653FEB768E5C91E7A3816B /* ContentView.swift */,
+				D9FB78EF852B2564B34DCD37 /* Info.plist */,
+				18FA577D72B7B00C59E79AE0 /* skilldApp.swift */,
+				1C58276535ACB2E191839CD4 /* SkillEntry.swift */,
+				B8C59A11E6091C02A10981F7 /* SkillInstaller.swift */,
+				A0405D29FFB3531A00EDBDDE /* SkillStore.swift */,
+			);
+			path = skilld;
+			sourceTree = "<group>";
+		};
+		A52633CA7F7F3BDE01D8CDDD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7103E716697CED657F0FE19C /* skilld.app */,
+				CCE1E2AEDCD3511BC55B1C25 /* skilldTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E508D45C6D86C28799D0B22C /* skilldTests */ = {
+			isa = PBXGroup;
+			children = (
+				AB0BE8B57985754186A7B706 /* Info.plist */,
+				37E904479BAEC025BA560ED9 /* SkillInstallerTests.swift */,
+			);
+			path = skilldTests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		35A738C18EE34A2742CA1308 /* skilldTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 429954F9D6F7B6EA0B096B62 /* Build configuration list for PBXNativeTarget "skilldTests" */;
+			buildPhases = (
+				48A77578641DEDCABB972E9D /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D80CA418CE0E1A3165567943 /* PBXTargetDependency */,
+			);
+			name = skilldTests;
+			packageProductDependencies = (
+			);
+			productName = skilldTests;
+			productReference = CCE1E2AEDCD3511BC55B1C25 /* skilldTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		BBB17B17F4DC1A332658E717 /* skilld */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 465BB324D8EFC2303CCEE7D0 /* Build configuration list for PBXNativeTarget "skilld" */;
+			buildPhases = (
+				11248911A4F8E55DB552C095 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = skilld;
+			packageProductDependencies = (
+			);
+			productName = skilld;
+			productReference = 7103E716697CED657F0FE19C /* skilld.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		275314F1D196ABB6C9CF9B0E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					35A738C18EE34A2742CA1308 = {
+						ProvisioningStyle = Automatic;
+					};
+					BBB17B17F4DC1A332658E717 = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = B6F99F5E29D3AF22970CBE80 /* Build configuration list for PBXProject "skilld" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 16CDC511C1B30C69A8E66269;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = A52633CA7F7F3BDE01D8CDDD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BBB17B17F4DC1A332658E717 /* skilld */,
+				35A738C18EE34A2742CA1308 /* skilldTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		11248911A4F8E55DB552C095 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1C40A887AAC705202B94D6D0 /* ContentView.swift in Sources */,
+				4DDB696D46DF3D415415D8B7 /* SkillEntry.swift in Sources */,
+				F75EADCFA707951C92CFF310 /* SkillInstaller.swift in Sources */,
+				116147674D439DF5F172C5D0 /* SkillStore.swift in Sources */,
+				6D6BEC14DB916BC216A08B69 /* skilldApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		48A77578641DEDCABB972E9D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				45035423532D93892D79D13E /* SkillInstallerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D80CA418CE0E1A3165567943 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BBB17B17F4DC1A332658E717 /* skilld */;
+			targetProxy = F3DF5A9B4F1735110FDED11B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		0162C98CB2E5A3BD9F712184 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		13F576DEE69E9EEDEB7412AE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = skilld/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				LSUIElement = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = sh.skilld.menubar;
+				PRODUCT_NAME = skilld;
+				SDKROOT = macosx;
+				SWIFT_STRICT_CONCURRENCY = complete;
+			};
+			name = Release;
+		};
+		2773BF440F5AB0744CEA1691 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = skilldTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = sh.skilld.menubarTests;
+				SDKROOT = macosx;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/skilld.app/Contents/MacOS/skilld";
+			};
+			name = Release;
+		};
+		6CC263C71C55117DC7FB8955 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = skilldTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = sh.skilld.menubarTests;
+				SDKROOT = macosx;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/skilld.app/Contents/MacOS/skilld";
+			};
+			name = Debug;
+		};
+		7AA821370BCF96F01010B29A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = skilld/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				LSUIElement = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = sh.skilld.menubar;
+				PRODUCT_NAME = skilld;
+				SDKROOT = macosx;
+				SWIFT_STRICT_CONCURRENCY = complete;
+			};
+			name = Debug;
+		};
+		93600C7726896F8D9FE99DA4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		429954F9D6F7B6EA0B096B62 /* Build configuration list for PBXNativeTarget "skilldTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6CC263C71C55117DC7FB8955 /* Debug */,
+				2773BF440F5AB0744CEA1691 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		465BB324D8EFC2303CCEE7D0 /* Build configuration list for PBXNativeTarget "skilld" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7AA821370BCF96F01010B29A /* Debug */,
+				13F576DEE69E9EEDEB7412AE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		B6F99F5E29D3AF22970CBE80 /* Build configuration list for PBXProject "skilld" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0162C98CB2E5A3BD9F712184 /* Debug */,
+				93600C7726896F8D9FE99DA4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 275314F1D196ABB6C9CF9B0E /* Project object */;
+}

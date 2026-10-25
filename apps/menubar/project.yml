@@ -1,0 +1,96 @@
+# project.yml — xcodegen spec for the skilld menubar app
+# Run `xcodegen generate` from apps/menubar/ to (re)generate skilld.xcodeproj.
+
+name: skilld
+
+options:
+  bundleIdPrefix: sh.skilld
+  deploymentTarget:
+    macOS: "14.0"
+  developmentLanguage: en
+  xcodeVersion: "16"
+  groupSortPosition: none       # keep our manual ordering
+
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    ENABLE_HARDENED_RUNTIME: YES
+    CODE_SIGN_STYLE: Automatic
+    MACOSX_DEPLOYMENT_TARGET: "14.0"
+    # Silence the linker warning about arm64 slice missing in simulator
+    EXCLUDED_ARCHS[sdk=iphonesimulator*]: arm64
+
+targets:
+
+  # ── Main app ──────────────────────────────────────────────────────────────
+  skilld:
+    type: application
+    platform: macOS
+    deploymentTarget: "14.0"
+
+    sources:
+      - path: skilld
+        excludes:
+          - "**/*.md"
+
+    resources:
+      # skills.json — skill catalogue
+      - path: Resources/skills.json
+      # All bundled skill folders (each becomes a folder reference in the bundle)
+      - path: Resources/skills
+        buildPhase: resources
+        type: folder
+
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: sh.skilld.menubar
+        PRODUCT_NAME: skilld
+        INFOPLIST_FILE: skilld/Info.plist
+        # macOS menubar apps don't show in the Dock
+        LSUIElement: YES
+        SWIFT_STRICT_CONCURRENCY: complete
+
+    info:
+      path: skilld/Info.plist
+      properties:
+        CFBundleName: skilld
+        CFBundleDisplayName: skilld
+        CFBundleIdentifier: sh.skilld.menubar
+        CFBundleVersion: "1"
+        CFBundleShortVersionString: "0.1.0"
+        NSPrincipalClass: NSApplication
+        LSUIElement: YES
+        NSHighResolutionCapable: YES
+
+  # ── Unit tests ─────────────────────────────────────────────────────────────
+  skilldTests:
+    type: bundle.unit-test
+    platform: macOS
+    deploymentTarget: "14.0"
+
+    sources:
+      - path: skilldTests
+
+    dependencies:
+      - target: skilld
+
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: sh.skilld.menubarTests
+        INFOPLIST_FILE: skilldTests/Info.plist
+        SWIFT_STRICT_CONCURRENCY: complete
+
+schemes:
+  skilld:
+    build:
+      targets:
+        skilld: all
+        skilldTests: [test]
+    run:
+      config: Debug
+    test:
+      config: Debug
+      targets:
+        - name: skilldTests
+          parallelizable: true
+          randomExecutionOrder: true
