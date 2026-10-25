@@ -11,10 +11,23 @@ dist/
 
 # Swift / Xcode
 build/
+DerivedData/
+.build/
 *.xcodeproj/*
 !*.xcodeproj/project.pbxproj
 !*.xcodeproj/xcshareddata/
 *.xcworkspace/*
 !*.xcworkspace/contents.xcworkspacedata
 xcuserdata/
+*.xcuserstate
+
+# OS & Editor
 .DS_Store
+.DS_Store?
+._*
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+
