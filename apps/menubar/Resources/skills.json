@@ -1,0 +1,62 @@
+[
+  {
+    "folder": "python-expert",
+    "name": "Python Expert",
+    "description": "Expert-level Python coding assistant. Writes idiomatic Python 3.12+, prefers dataclasses and type hints, follows PEP 8.",
+    "source_url": "https://github.com/skilld-sh/skills/tree/main/python-expert"
+  },
+  {
+    "folder": "git-commit",
+    "name": "Git Commit",
+    "description": "Writes clear, conventional Git commit messages following the Conventional Commits 1.0 spec.",
+    "source_url": "https://github.com/skilld-sh/skills/tree/main/git-commit"
+  },
+  {
+    "folder": "code-review",
+    "name": "Code Review",
+    "description": "Performs thorough, constructive code review. Checks correctness, readability, security, performance, and test coverage.",
+    "source_url": "https://github.com/skilld-sh/skills/tree/main/code-review"
+  },
+  {
+    "folder": "sql-query",
+    "name": "SQL Query",
+    "description": "Writes and optimises SQL queries for PostgreSQL 16+. Explains query plans, suggests indexes, and avoids common anti-patterns.",
+    "source_url": "https://github.com/skilld-sh/skills/tree/main/sql-query"
+  },
+  {
+    "folder": "docker-compose",
+    "name": "Docker Compose",
+    "description": "Writes and debugs Docker Compose files (Compose V2 spec). Covers multi-service setups, health checks, named volumes.",
+    "source_url": "https://github.com/skilld-sh/skills/tree/main/docker-compose"
+  },
+  {
+    "folder": "typescript-strict",
+    "name": "TypeScript Strict",
+    "description": "Writes TypeScript with strict compiler settings. Enforces no-any, explicit return types, narrowing over casting.",
+    "source_url": "https://github.com/skilld-sh/skills/tree/main/typescript-strict"
+  },
+  {
+    "folder": "api-design",
+    "name": "API Design",
+    "description": "Designs and reviews REST APIs following OpenAPI 3.1 conventions. Covers resource naming, HTTP semantics, versioning, and pagination.",
+    "source_url": "https://github.com/skilld-sh/skills/tree/main/api-design"
+  },
+  {
+    "folder": "test-writer",
+    "name": "Test Writer",
+    "description": "Writes thorough unit and integration tests covering happy path, edge cases, and error paths. Framework-agnostic.",
+    "source_url": "https://github.com/skilld-sh/skills/tree/main/test-writer"
+  },
+  {
+    "folder": "swift-concurrency",
+    "name": "Swift Concurrency",
+    "description": "Writes modern Swift concurrency code using async/await, actors, and structured concurrency. Targets Swift 6.",
+    "source_url": "https://github.com/skilld-sh/skills/tree/main/swift-concurrency"
+  },
+  {
+    "folder": "fastapi-patterns",
+    "name": "FastAPI Patterns",
+    "description": "Implements FastAPI endpoints following production patterns: Pydantic v2 models, dependency injection, background tasks.",
+    "source_url": "https://github.com/skilld-sh/skills/tree/main/fastapi-patterns"
+  }
+]
