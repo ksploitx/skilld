@@ -12,7 +12,9 @@
 		45035423532D93892D79D13E /* SkillInstallerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E904479BAEC025BA560ED9 /* SkillInstallerTests.swift */; };
 		4DDB696D46DF3D415415D8B7 /* SkillEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C58276535ACB2E191839CD4 /* SkillEntry.swift */; };
 		6D6BEC14DB916BC216A08B69 /* skilldApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FA577D72B7B00C59E79AE0 /* skilldApp.swift */; };
+		D5360A445F99E53C8A29EC67 /* skills in Resources */ = {isa = PBXBuildFile; fileRef = 7CAEC334640AD6ED73A8CBDB /* skills */; };
 		F75EADCFA707951C92CFF310 /* SkillInstaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8C59A11E6091C02A10981F7 /* SkillInstaller.swift */; };
+		FC977C19535629BC3A1529D4 /* skills.json in Resources */ = {isa = PBXBuildFile; fileRef = 6568C4A733BA7C77B5AC8442 /* skills.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,7 +32,9 @@
 		18FA577D72B7B00C59E79AE0 /* skilldApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = skilldApp.swift; sourceTree = "<group>"; };
 		1C58276535ACB2E191839CD4 /* SkillEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillEntry.swift; sourceTree = "<group>"; };
 		37E904479BAEC025BA560ED9 /* SkillInstallerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillInstallerTests.swift; sourceTree = "<group>"; };
+		6568C4A733BA7C77B5AC8442 /* skills.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = skills.json; sourceTree = "<group>"; };
 		7103E716697CED657F0FE19C /* skilld.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = skilld.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7CAEC334640AD6ED73A8CBDB /* skills */ = {isa = PBXFileReference; lastKnownFileType = folder; name = skills; path = Resources/skills; sourceTree = SOURCE_ROOT; };
 		A0405D29FFB3531A00EDBDDE /* SkillStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillStore.swift; sourceTree = "<group>"; };
 		AB0BE8B57985754186A7B706 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B8C59A11E6091C02A10981F7 /* SkillInstaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillInstaller.swift; sourceTree = "<group>"; };
@@ -42,10 +46,20 @@
 		16CDC511C1B30C69A8E66269 = {
 			isa = PBXGroup;
 			children = (
+				1E8721A3F7D2FF1CEAF74587 /* Resources */,
 				1F933E6534E9192CB170FFED /* skilld */,
 				E508D45C6D86C28799D0B22C /* skilldTests */,
+				7CAEC334640AD6ED73A8CBDB /* skills */,
 				A52633CA7F7F3BDE01D8CDDD /* Products */,
 			);
+			sourceTree = "<group>";
+		};
+		1E8721A3F7D2FF1CEAF74587 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6568C4A733BA7C77B5AC8442 /* skills.json */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		1F933E6534E9192CB170FFED /* skilld */ = {
@@ -105,6 +119,7 @@
 			buildConfigurationList = 465BB324D8EFC2303CCEE7D0 /* Build configuration list for PBXNativeTarget "skilld" */;
 			buildPhases = (
 				11248911A4F8E55DB552C095 /* Sources */,
+				59B5122B1231D6B9277217E0 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -153,6 +168,18 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		59B5122B1231D6B9277217E0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D5360A445F99E53C8A29EC67 /* skills in Resources */,
+				FC977C19535629BC3A1529D4 /* skills.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		11248911A4F8E55DB552C095 /* Sources */ = {

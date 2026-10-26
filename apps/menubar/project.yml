@@ -32,11 +32,10 @@ targets:
       - path: skilld
         excludes:
           - "**/*.md"
-
-    resources:
-      # skills.json — skill catalogue
+      # skills.json — skill catalogue (copied as a flat file resource)
       - path: Resources/skills.json
-      # All bundled skill folders (each becomes a folder reference in the bundle)
+        buildPhase: resources
+      # skills/ — folder reference so subfolder structure is preserved in the bundle
       - path: Resources/skills
         buildPhase: resources
         type: folder
