@@ -8,6 +8,7 @@ and a built-in prompt clarifier.
 ![Architecture Diagram](docs/skilld_architecture_hld.png)
 
 ## Start here
+
 - `PRD.md` — what we're building, for whom, v1 scope.
 - `ARCHITECTURE.md` — how the three apps and backend fit together.
 - `ROADMAP.md` — build order and exit criteria per phase.
@@ -15,6 +16,7 @@ and a built-in prompt clarifier.
   in this repo. Read this before generating code here.
 
 ## Repo layout
+
 ```
 apps/backend      FastAPI service
 apps/menubar      SwiftUI macOS app
@@ -23,5 +25,6 @@ packages/shared-types   Shared TS types
 ```
 
 ## Local dev
+
 See each app's own README under `apps/<name>/README.md` once scaffolded.
 Root `docker-compose.yml` runs backend + Postgres + Redis together.
