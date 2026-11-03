@@ -1,13 +1,7 @@
-from fastapi import FastAPI
-from database import redis_client
-
-app = FastAPI(title="skilld API")
-
-@app.get("/health")
-async def health():
-    return {"status": "ok"}
-
-@app.get("/skills")
-async def search_skills(query: str = ""):
-    # Stub endpoint
-    return []
+"""
+Root-level shim — delegates to app.main.
+Run with: uvicorn app.main:app --reload
+This file kept for backward compatibility with any tooling that references
+apps/backend/main.py directly.
+"""
+from app.main import app  # noqa: F401
