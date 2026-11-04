@@ -1,0 +1,50 @@
+# Curated GitHub repositories to scan for SKILL.md files.
+#
+# Selection criteria:
+#   1. anthropics/claude-code  — Official Claude Code repo. Contains bundled
+#      example skills; also the canonical format reference.
+#   2. anthropics/anthropic-cookbook  — Official Anthropic prompts cookbook;
+#      community ports skills from here frequently.
+#   3. simonw/llm  — Popular LLM CLI tool; large community, many contributed
+#      SKILL.md-format prompts migrated by early adopters.
+#   4. BuilderIO/ai-shell  — AI-powered shell-command assistant; overlapping
+#      audience, several published Claude Code skills in the wild.
+#   5. nicholasgasior/claude-code-skills  — Dedicated community skills
+#      collection specifically targeting Claude Code's SKILL.md format.
+#
+# Each entry:
+#   repo:        "owner/repo"
+#   branch:      default branch to scan (main/master)
+#   description: why it's in the list (not used at runtime)
+
+repos:
+  - repo: anthropics/claude-code
+    branch: main
+    description: >
+      Official Claude Code repo. Contains bundled example skills
+      and is the canonical SKILL.md format reference.
+
+  - repo: anthropics/anthropic-cookbook
+    branch: main
+    description: >
+      Official Anthropic prompts cookbook. Community ports skills
+      from here; high-quality, well-maintained.
+
+  - repo: simonw/llm
+    branch: main
+    description: >
+      Popular LLM CLI tool with a large community. Many SKILL.md
+      contributions from early Claude Code adopters.
+
+  - repo: BuilderIO/ai-shell
+    branch: main
+    description: >
+      AI-powered shell-command assistant. Overlapping developer
+      audience with several published Claude Code skills in the wild.
+
+  - repo: nicholasgasior/claude-code-skills
+    branch: main
+    description: >
+      Dedicated community skill collection specifically targeting
+      the Claude Code SKILL.md format. Best source for variety.
+
