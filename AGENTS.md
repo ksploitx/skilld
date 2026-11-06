@@ -5,12 +5,14 @@ before making changes. Follow it over your own defaults when they
 conflict.
 
 ## Read first
+
 - `PRD.md` — what we're building and why, current v1 scope.
 - `ARCHITECTURE.md` — component boundaries and data flow. Don't have
   the extension talk to Postgres directly, don't have the menubar app
   talk to GitHub directly, etc. — everything routes through the backend.
 
 ## Repo structure
+
 ```
 apps/backend      FastAPI service — Python
 apps/menubar      SwiftUI macOS app
@@ -64,6 +66,7 @@ shared-types update or a genuine new backend endpoint both clients need.
    Code skills folder path) — define once as a constant/config value.
 
 ## What "done" looks like for a task
+
 - Code runs locally per the relevant app's README.
 - New/changed endpoints reflected in `ARCHITECTURE.md`.
 - No cross-app coupling introduced outside the documented backend
