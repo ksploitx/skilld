@@ -1,62 +1,132 @@
 [
   {
-    "folder": "python-expert",
+    "id": "bundled-python-expert",
     "name": "Python Expert",
+    "folder_name": "python-expert",
     "description": "Expert-level Python coding assistant. Writes idiomatic Python 3.12+, prefers dataclasses and type hints, follows PEP 8.",
-    "source_url": "https://github.com/skilld-sh/skills/tree/main/python-expert"
+    "tags": ["python", "typing", "best-practices"],
+    "source": "bundled",
+    "source_url": "https://github.com/skilld-sh/skills/tree/main/python-expert",
+    "repo": "",
+    "repo_path": "",
+    "commit_sha": "",
+    "updated_at": "2026-01-01T00:00:00Z"
   },
   {
-    "folder": "git-commit",
+    "id": "bundled-git-commit",
     "name": "Git Commit",
+    "folder_name": "git-commit",
     "description": "Writes clear, conventional Git commit messages following the Conventional Commits 1.0 spec.",
-    "source_url": "https://github.com/skilld-sh/skills/tree/main/git-commit"
+    "tags": ["git", "commit", "workflow"],
+    "source": "bundled",
+    "source_url": "https://github.com/skilld-sh/skills/tree/main/git-commit",
+    "repo": "",
+    "repo_path": "",
+    "commit_sha": "",
+    "updated_at": "2026-01-01T00:00:00Z"
   },
   {
-    "folder": "code-review",
+    "id": "bundled-code-review",
     "name": "Code Review",
+    "folder_name": "code-review",
     "description": "Performs thorough, constructive code review. Checks correctness, readability, security, performance, and test coverage.",
-    "source_url": "https://github.com/skilld-sh/skills/tree/main/code-review"
+    "tags": ["review", "quality", "checklist"],
+    "source": "bundled",
+    "source_url": "https://github.com/skilld-sh/skills/tree/main/code-review",
+    "repo": "",
+    "repo_path": "",
+    "commit_sha": "",
+    "updated_at": "2026-01-01T00:00:00Z"
   },
   {
-    "folder": "sql-query",
+    "id": "bundled-sql-query",
     "name": "SQL Query",
+    "folder_name": "sql-query",
     "description": "Writes and optimises SQL queries for PostgreSQL 16+. Explains query plans, suggests indexes, and avoids common anti-patterns.",
-    "source_url": "https://github.com/skilld-sh/skills/tree/main/sql-query"
+    "tags": ["sql", "database", "query"],
+    "source": "bundled",
+    "source_url": "https://github.com/skilld-sh/skills/tree/main/sql-query",
+    "repo": "",
+    "repo_path": "",
+    "commit_sha": "",
+    "updated_at": "2026-01-01T00:00:00Z"
   },
   {
-    "folder": "docker-compose",
+    "id": "bundled-docker-compose",
     "name": "Docker Compose",
+    "folder_name": "docker-compose",
     "description": "Writes and debugs Docker Compose files (Compose V2 spec). Covers multi-service setups, health checks, named volumes.",
-    "source_url": "https://github.com/skilld-sh/skills/tree/main/docker-compose"
+    "tags": ["docker", "compose", "devops"],
+    "source": "bundled",
+    "source_url": "https://github.com/skilld-sh/skills/tree/main/docker-compose",
+    "repo": "",
+    "repo_path": "",
+    "commit_sha": "",
+    "updated_at": "2026-01-01T00:00:00Z"
   },
   {
-    "folder": "typescript-strict",
+    "id": "bundled-typescript-strict",
     "name": "TypeScript Strict",
+    "folder_name": "typescript-strict",
     "description": "Writes TypeScript with strict compiler settings. Enforces no-any, explicit return types, narrowing over casting.",
-    "source_url": "https://github.com/skilld-sh/skills/tree/main/typescript-strict"
+    "tags": ["typescript", "types", "strict"],
+    "source": "bundled",
+    "source_url": "https://github.com/skilld-sh/skills/tree/main/typescript-strict",
+    "repo": "",
+    "repo_path": "",
+    "commit_sha": "",
+    "updated_at": "2026-01-01T00:00:00Z"
   },
   {
-    "folder": "api-design",
+    "id": "bundled-api-design",
     "name": "API Design",
+    "folder_name": "api-design",
     "description": "Designs and reviews REST APIs following OpenAPI 3.1 conventions. Covers resource naming, HTTP semantics, versioning, and pagination.",
-    "source_url": "https://github.com/skilld-sh/skills/tree/main/api-design"
+    "tags": ["api", "rest", "design"],
+    "source": "bundled",
+    "source_url": "https://github.com/skilld-sh/skills/tree/main/api-design",
+    "repo": "",
+    "repo_path": "",
+    "commit_sha": "",
+    "updated_at": "2026-01-01T00:00:00Z"
   },
   {
-    "folder": "test-writer",
+    "id": "bundled-test-writer",
     "name": "Test Writer",
+    "folder_name": "test-writer",
     "description": "Writes thorough unit and integration tests covering happy path, edge cases, and error paths. Framework-agnostic.",
-    "source_url": "https://github.com/skilld-sh/skills/tree/main/test-writer"
+    "tags": ["testing", "unit-test", "tdd"],
+    "source": "bundled",
+    "source_url": "https://github.com/skilld-sh/skills/tree/main/test-writer",
+    "repo": "",
+    "repo_path": "",
+    "commit_sha": "",
+    "updated_at": "2026-01-01T00:00:00Z"
   },
   {
-    "folder": "swift-concurrency",
+    "id": "bundled-swift-concurrency",
     "name": "Swift Concurrency",
+    "folder_name": "swift-concurrency",
     "description": "Writes modern Swift concurrency code using async/await, actors, and structured concurrency. Targets Swift 6.",
-    "source_url": "https://github.com/skilld-sh/skills/tree/main/swift-concurrency"
+    "tags": ["swift", "concurrency", "async"],
+    "source": "bundled",
+    "source_url": "https://github.com/skilld-sh/skills/tree/main/swift-concurrency",
+    "repo": "",
+    "repo_path": "",
+    "commit_sha": "",
+    "updated_at": "2026-01-01T00:00:00Z"
   },
   {
-    "folder": "fastapi-patterns",
+    "id": "bundled-fastapi-patterns",
     "name": "FastAPI Patterns",
+    "folder_name": "fastapi-patterns",
     "description": "Implements FastAPI endpoints following production patterns: Pydantic v2 models, dependency injection, background tasks.",
-    "source_url": "https://github.com/skilld-sh/skills/tree/main/fastapi-patterns"
+    "tags": ["fastapi", "python", "backend"],
+    "source": "bundled",
+    "source_url": "https://github.com/skilld-sh/skills/tree/main/fastapi-patterns",
+    "repo": "",
+    "repo_path": "",
+    "commit_sha": "",
+    "updated_at": "2026-01-01T00:00:00Z"
   }
 ]

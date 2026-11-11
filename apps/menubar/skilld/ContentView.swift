@@ -1,8 +1,8 @@
 // ContentView.swift
 // skilld — menubar app
 //
-// Popover list UI: search field, per-row Install / Remove / Update buttons,
-// installed indicator, update badge.
+// Popover UI: search bar, loading/offline states, skill list with
+// install/remove/update actions, source repo link, per-row progress and errors.
 
 import SwiftUI
 
@@ -14,15 +14,15 @@ struct ContentView: View {
     var body: some View {
         VStack(spacing: 0) {
             HeaderView()
-            SearchBarView(text: $store.searchText)
+            SearchBarView(store: store)
             Divider().opacity(0.3)
-            SkillListView(store: store)
-            if let err = store.lastError {
-                ErrorBannerView(message: err) { store.lastError = nil }
-            }
+            BodyView(store: store)
         }
         .background(Color(NSColor.windowBackgroundColor))
-        .frame(width: 360, height: 480)
+        .frame(width: 380, height: 500)
+        .onAppear {
+            store.refresh()
+        }
     }
 }
 
@@ -32,7 +32,7 @@ private struct HeaderView: View {
     var body: some View {
         HStack(spacing: 8) {
             Image(systemName: "brain.filled.head.profile")
-                .font(.system(size: 18, weight: .semibold))
+                .font(.system(size: 17, weight: .semibold))
                 .foregroundStyle(
                     LinearGradient(
                         colors: [.purple, .indigo],
@@ -41,7 +41,7 @@ private struct HeaderView: View {
                     )
                 )
             Text("skilld")
-                .font(.system(size: 16, weight: .bold, design: .rounded))
+                .font(.system(size: 15, weight: .bold, design: .rounded))
                 .foregroundStyle(
                     LinearGradient(
                         colors: [.purple, .indigo],
@@ -50,12 +50,12 @@ private struct HeaderView: View {
                     )
                 )
             Text("library")
-                .font(.system(size: 16, weight: .regular, design: .rounded))
+                .font(.system(size: 15, weight: .regular, design: .rounded))
                 .foregroundColor(.secondary)
             Spacer()
         }
         .padding(.horizontal, 16)
-        .padding(.vertical, 12)
+        .padding(.vertical, 10)
         .background(
             LinearGradient(
                 colors: [
@@ -72,19 +72,30 @@ private struct HeaderView: View {
 // MARK: - Search bar
 
 private struct SearchBarView: View {
-    @Binding var text: String
+    let store: SkillStore
 
     var body: some View {
         HStack(spacing: 8) {
-            Image(systemName: "magnifyingglass")
-                .foregroundColor(Color.secondary.opacity(0.6))
-                .font(.system(size: 13))
-            TextField("Search skills…", text: $text)
-                .textFieldStyle(.plain)
-                .font(.system(size: 13))
-            if !text.isEmpty {
+            if store.isLoading {
+                ProgressView()
+                    .scaleEffect(0.6)
+                    .frame(width: 14, height: 14)
+            } else {
+                Image(systemName: "magnifyingglass")
+                    .foregroundColor(Color.secondary.opacity(0.6))
+                    .font(.system(size: 13))
+            }
+            TextField("Search skills…", text: Binding(
+                get: { store.searchText },
+                set: { store.searchText = $0; store.onSearchTextChanged($0) }
+            ))
+            .textFieldStyle(.plain)
+            .font(.system(size: 13))
+
+            if !store.searchText.isEmpty {
                 Button {
-                    text = ""
+                    store.searchText = ""
+                    store.onSearchTextChanged("")
                 } label: {
                     Image(systemName: "xmark.circle.fill")
                         .foregroundColor(Color.secondary.opacity(0.6))
@@ -102,88 +113,185 @@ private struct SearchBarView: View {
     }
 }
 
-// MARK: - List
+// MARK: - Body (offline banner + list)
 
-private struct SkillListView: View {
+private struct BodyView: View {
     let store: SkillStore
 
     var body: some View {
-        if store.filteredSkills.isEmpty {
-            ContentUnavailableView(
-                "No skills found",
-                systemImage: "magnifyingglass",
-                description: Text("Try a different search term.")
-            )
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-        } else {
-            ScrollView {
-                LazyVStack(spacing: 0) {
-                    ForEach(store.filteredSkills) { skill in
-                        SkillRowView(skill: skill, store: store)
-                        if skill.id != store.filteredSkills.last?.id {
-                            Divider()
-                                .padding(.horizontal, 16)
-                                .opacity(0.4)
+        VStack(spacing: 0) {
+            if store.isOffline {
+                OfflineBannerView()
+            }
+
+            let displayed = store.isOffline ? store.filteredSkills : store.skills
+
+            if store.isLoading && displayed.isEmpty {
+                VStack {
+                    Spacer()
+                    ProgressView("Loading skills…")
+                        .controlSize(.regular)
+                    Spacer()
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else if displayed.isEmpty {
+                ContentUnavailableView(
+                    "No skills found",
+                    systemImage: "magnifyingglass",
+                    description: Text("Try a different search term.")
+                )
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else {
+                ScrollView {
+                    LazyVStack(spacing: 0) {
+                        ForEach(displayed) { skill in
+                            SkillRowView(skill: skill, store: store)
+                            if skill.id != displayed.last?.id {
+                                Divider()
+                                    .padding(.horizontal, 16)
+                                    .opacity(0.4)
+                            }
                         }
                     }
+                    .padding(.vertical, 4)
                 }
-                .padding(.vertical, 4)
+                .scrollContentBackground(.hidden)
             }
-            .scrollContentBackground(.hidden)
         }
     }
 }
 
-// MARK: - Row
+// MARK: - Offline banner
+
+private struct OfflineBannerView: View {
+    var body: some View {
+        HStack(spacing: 6) {
+            Image(systemName: "wifi.slash")
+                .font(.system(size: 11))
+                .foregroundColor(.orange)
+            Text("Offline — showing bundled skills")
+                .font(.system(size: 11, weight: .medium))
+                .foregroundColor(.orange)
+            Spacer()
+        }
+        .padding(.horizontal, 14)
+        .padding(.vertical, 6)
+        .background(Color.orange.opacity(0.1))
+    }
+}
+
+// MARK: - Skill row
 
 private struct SkillRowView: View {
-    let skill: SkillEntry
+    let skill: SkillSummary
     let store: SkillStore
 
     @State private var isHovered = false
 
     private var installed: Bool { store.isInstalled(skill) }
-    private var hasUpdate: Bool { installed && store.updateAvailable(skill) }
-    private var opState: OperationState? { store.operationState[skill.id] }
-    private var isWorking: Bool { opState == .inProgress }
+    private var hasUpdate: Bool { store.hasUpdate(skill) }
+    private var opState: SkillStore.SkillOpState? { store.operationState[skill.folderName] }
+    private var isWorking: Bool { opState != nil }
+    private var errorMsg: String? { store.operationError[skill.folderName] }
 
     var body: some View {
-        HStack(alignment: .top, spacing: 10) {
+        VStack(alignment: .leading, spacing: 0) {
+            HStack(alignment: .top, spacing: 10) {
 
-            // Installed indicator dot
-            Circle()
-                .fill(installed ? Color.green : Color.clear)
-                .stroke(installed ? Color.green : Color.secondary.opacity(0.3), lineWidth: 1.2)
-                .frame(width: 8, height: 8)
-                .padding(.top, 5)
+                // Installed indicator dot
+                Circle()
+                    .fill(installed ? Color.green : Color.clear)
+                    .stroke(installed ? Color.green : Color.secondary.opacity(0.3), lineWidth: 1.2)
+                    .frame(width: 8, height: 8)
+                    .padding(.top, 5)
 
-            // Text content
-            VStack(alignment: .leading, spacing: 3) {
-                HStack(spacing: 6) {
-                    Text(skill.name)
-                        .font(.system(size: 13, weight: .semibold))
-                        .foregroundColor(.primary)
+                VStack(alignment: .leading, spacing: 3) {
+                    HStack(spacing: 6) {
+                        Text(skill.name)
+                            .font(.system(size: 13, weight: .semibold))
+                        if hasUpdate {
+                            UpdateBadge()
+                        }
+                    }
 
-                    if hasUpdate {
-                        UpdateBadge()
+                    if let desc = skill.description {
+                        Text(desc)
+                            .font(.system(size: 11.5))
+                            .foregroundColor(.secondary)
+                            .lineLimit(2)
+                    }
+
+                    // Tags
+                    if !skill.tags.isEmpty {
+                        HStack(spacing: 4) {
+                            ForEach(skill.tags.prefix(4), id: \.self) { tag in
+                                Text(tag)
+                                    .font(.system(size: 9, weight: .medium))
+                                    .padding(.horizontal, 5)
+                                    .padding(.vertical, 2)
+                                    .background(Color.accentColor.opacity(0.12))
+                                    .foregroundColor(.accentColor)
+                                    .clipShape(Capsule())
+                            }
+                        }
+                    }
+
+                    // Source repo link
+                    if !skill.repo.isEmpty, let url = URL(string: skill.sourceURL) {
+                        Link(destination: url) {
+                            HStack(spacing: 3) {
+                                Image(systemName: "arrow.up.right.square")
+                                    .font(.system(size: 9))
+                                Text(skill.repo)
+                                    .font(.system(size: 10))
+                            }
+                            .foregroundColor(.secondary)
+                        }
+                        .buttonStyle(.plain)
                     }
                 }
 
-                Text(skill.description)
-                    .font(.system(size: 11.5))
-                    .foregroundColor(.secondary)
-                    .lineLimit(2)
-                    .fixedSize(horizontal: false, vertical: true)
+                Spacer()
+
+                // Action area
+                if isWorking {
+                    VStack {
+                        ProgressView()
+                            .scaleEffect(0.65)
+                            .frame(width: 24, height: 24)
+                        Text(operationLabel(opState))
+                            .font(.system(size: 9))
+                            .foregroundColor(.secondary)
+                    }
+                } else {
+                    HStack(spacing: 6) {
+                        if installed {
+                            if hasUpdate {
+                                PillButton(label: "Update", icon: "arrow.down.circle", style: .update) {
+                                    store.update(skill)
+                                }
+                            }
+                            PillButton(label: "Remove", icon: "trash", style: .destructive) {
+                                store.remove(skill)
+                            }
+                        } else {
+                            PillButton(label: "Install", icon: "arrow.down.to.line", style: .primary) {
+                                store.install(skill)
+                            }
+                        }
+                    }
+                }
             }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 10)
 
-            Spacer()
-
-            // Action button(s)
-            ActionButtons(skill: skill, store: store, installed: installed,
-                          hasUpdate: hasUpdate, isWorking: isWorking)
+            // Per-row error
+            if let msg = errorMsg {
+                ErrorRowView(message: msg) {
+                    store.clearError(for: skill)
+                }
+            }
         }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 10)
         .background(
             RoundedRectangle(cornerRadius: 8)
                 .fill(isHovered ? Color.secondary.opacity(0.07) : Color.clear)
@@ -193,6 +301,15 @@ private struct SkillRowView: View {
         .onHover { isHovered = $0 }
         .animation(.easeInOut(duration: 0.15), value: isHovered)
         .animation(.easeInOut(duration: 0.2), value: installed)
+    }
+
+    private func operationLabel(_ state: SkillStore.SkillOpState?) -> String {
+        switch state {
+        case .installing: return "Installing…"
+        case .removing:   return "Removing…"
+        case .updating:   return "Updating…"
+        case nil:         return ""
+        }
     }
 }
 
@@ -218,39 +335,6 @@ private struct UpdateBadge: View {
     }
 }
 
-// MARK: - Action buttons
-
-private struct ActionButtons: View {
-    let skill: SkillEntry
-    let store: SkillStore
-    let installed: Bool
-    let hasUpdate: Bool
-    let isWorking: Bool
-
-    var body: some View {
-        HStack(spacing: 6) {
-            if isWorking {
-                ProgressView()
-                    .scaleEffect(0.6)
-                    .frame(width: 24, height: 24)
-            } else if installed {
-                if hasUpdate {
-                    PillButton(label: "Update", icon: "arrow.down.circle", style: .update) {
-                        store.update(skill)
-                    }
-                }
-                PillButton(label: "Remove", icon: "trash", style: .destructive) {
-                    store.remove(skill)
-                }
-            } else {
-                PillButton(label: "Install", icon: "arrow.down.to.line", style: .primary) {
-                    store.install(skill)
-                }
-            }
-        }
-    }
-}
-
 // MARK: - Pill button
 
 private struct PillButton: View {
@@ -265,9 +349,9 @@ private struct PillButton: View {
 
     private var foreground: Color {
         switch style {
-        case .primary: return .white
+        case .primary:     return .white
         case .destructive: return isHovered ? .white : Color.red.opacity(0.8)
-        case .update: return .white
+        case .update:      return .white
         }
     }
 
@@ -277,7 +361,9 @@ private struct PillButton: View {
             return LinearGradient(colors: [.purple, .indigo], startPoint: .leading, endPoint: .trailing)
         case .destructive:
             return LinearGradient(
-                colors: isHovered ? [Color.red.opacity(0.9), Color.red.opacity(0.7)] : [Color.red.opacity(0.12), Color.red.opacity(0.12)],
+                colors: isHovered
+                    ? [Color.red.opacity(0.9), Color.red.opacity(0.7)]
+                    : [Color.red.opacity(0.12), Color.red.opacity(0.12)],
                 startPoint: .leading,
                 endPoint: .trailing
             )
@@ -293,7 +379,11 @@ private struct PillButton: View {
                 .foregroundColor(foreground)
                 .padding(.horizontal, 10)
                 .padding(.vertical, 5)
-                .background(Capsule().fill(gradient).opacity(isHovered && style != .destructive ? 0.85 : 1))
+                .background(
+                    Capsule()
+                        .fill(gradient)
+                        .opacity(isHovered && style != .destructive ? 0.85 : 1)
+                )
                 .scaleEffect(isHovered ? 0.97 : 1)
         }
         .buttonStyle(.plain)
@@ -302,34 +392,32 @@ private struct PillButton: View {
     }
 }
 
-// MARK: - Error banner
+// MARK: - Per-row error view
 
-private struct ErrorBannerView: View {
+private struct ErrorRowView: View {
     let message: String
     let dismiss: () -> Void
 
     var body: some View {
-        HStack(spacing: 8) {
+        HStack(spacing: 6) {
             Image(systemName: "exclamationmark.triangle.fill")
                 .foregroundColor(.orange)
-                .font(.system(size: 12))
+                .font(.system(size: 10))
             Text(message)
-                .font(.system(size: 11))
-                .foregroundColor(.primary)
-                .lineLimit(2)
+                .font(.system(size: 10))
+                .foregroundColor(.secondary)
+                .lineLimit(3)
                 .fixedSize(horizontal: false, vertical: true)
             Spacer()
             Button { dismiss() } label: {
                 Image(systemName: "xmark")
-                    .font(.system(size: 10, weight: .bold))
+                    .font(.system(size: 9, weight: .bold))
                     .foregroundColor(.secondary)
             }
             .buttonStyle(.plain)
         }
-        .padding(.horizontal, 12)
-        .padding(.vertical, 8)
-        .background(Color.orange.opacity(0.1))
-        .overlay(Divider().frame(maxWidth: .infinity, maxHeight: 1), alignment: .top)
+        .padding(.horizontal, 20)
+        .padding(.bottom, 6)
     }
 }
 

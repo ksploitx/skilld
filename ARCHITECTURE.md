@@ -39,17 +39,34 @@ dumb and swappable, and so scraping/rate-limits live in one place.
   trigger a live scrape.
 
 ### apps/menubar (SwiftUI, macOS)
-- Calls backend `/skills` to list/search.
-- Installs a skill by fetching the folder from GitHub using
-  `repo + repo_path + commit_sha` from the API response, then writing it to
-  `~/.claude/skills/<folder_name>/SKILL.md` — confirmed as the personal
-  (global) skills path Claude Code reads on macOS. No restart needed;
-  Claude Code watches the directory for changes live. See
-  `docs/CLAUDE_CODE_SKILLS.md` for full convention details.
-- Tracks installed state locally (simple local JSON manifest of
-  installed skill ids + versions, not synced to backend in v1).
+- Calls backend `/skills` to list/search and `/skills/updated-since` to check
+  for updates on installed skills. Falls back to a bundled `skills.json` when
+  the backend is unreachable, with an "offline" banner in the UI.
+- Search input is debounced 300 ms before firing an API call. Local filtering
+  is used only in offline mode.
+- Installs a skill by fetching the folder tarball from GitHub
+  (`codeload.github.com/{owner}/{repo}/tar.gz/{commit_sha}`) using
+  `repo + repo_path + commit_sha` from the API response. Download goes to a
+  temp directory first; the skill is validated (SKILL.md required, no path
+  traversal, no symlinks, ≤ 5 MB / ≤ 100 files), then moved atomically into
+  `~/.claude/skills/<folder_name>/`. On any failure, the temp dir is cleaned
+  up — no partial folder is ever left behind. See `docs/CLAUDE_CODE_SKILLS.md`
+  for the full filesystem convention.
+- Only fetches content from: `github.com`, `api.github.com`,
+  `codeload.github.com`. Redirects to other hosts are rejected.
+- Tracks installed state locally (`~/.claude/skilld-manifest.json`) with
+  `folder`, `installedAt`, `contentHash` (SHA-256), and `commitSha`.
+  Manifest is never synced to backend in v1.
+- Detects updates by comparing `commitSha` in the manifest against the
+  API response from `/skills/updated-since`. Shows an "Update" badge per skill.
 - Native AppKit/SwiftUI only — no cross-platform framework, since
-  NSStatusItem + file system watching need native hooks.
+  NSStatusItem + filesystem writes need native hooks.
+
+New files added in this phase:
+  `APIConfig.swift`        — base URL constant, overridable via Info.plist / env
+  `APIError.swift`         — typed error enum (offline, timeout, serverError, decodingError)
+  `SkillsAPIClient.swift`  — URLSession-based client for /skills endpoints
+  `GitHubDownloader.swift` — download, extract, validate, and atomically install from GitHub
 
 ### apps/extension (TypeScript, Manifest V3)
 - Content script per site (`claude.ai`, `chatgpt.com`) — separate
