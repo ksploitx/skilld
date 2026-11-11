@@ -1,41 +1,56 @@
 // APIConfig.swift
 // skilld — menubar app
 //
-// Single source of truth for the backend API base URL.
-// Override via Info.plist key "SkilldAPIBaseURL" or environment
-// variable SKILLD_API_BASE_URL for development builds.
+// Single source of truth for the backend base URL.
+// Override for dev:
+//   • Info.plist key "SkilldAPIBaseURL" (set per build configuration in Xcode)
+//   • SKILLD_API_BASE_URL environment variable (convenient for quick overrides)
+// Production default: https://api.skilld.sh  (change when you have a domain)
+// Dev default:        http://localhost:8000
 
 import Foundation
 
 enum APIConfig {
-    /// Default backend URL used during local development.
-    private static let defaultBaseURL = "http://localhost:8000"
 
-    /// Resolved base URL, checked in order:
-    /// 1. Environment variable `SKILLD_API_BASE_URL`
-    /// 2. Info.plist key `SkilldAPIBaseURL`
-    /// 3. Built-in default (`http://localhost:8000`)
-    static var baseURL: URL {
-        if let env = ProcessInfo.processInfo.environment["SKILLD_API_BASE_URL"],
-           let url = URL(string: env) {
+    // MARK: - Base URL
+
+    /// Resolved at startup. Priority: env var → Info.plist → hardcoded default.
+    static let baseURL: URL = {
+        // 1. Environment variable (highest priority — useful for CI / quick dev)
+        if let envString = ProcessInfo.processInfo.environment["SKILLD_API_BASE_URL"],
+           let url = URL(string: envString) {
             return url
         }
-        if let plist = Bundle.main.object(forInfoDictionaryKey: "SkilldAPIBaseURL") as? String,
-           let url = URL(string: plist) {
+        // 2. Info.plist key (set per build configuration in Xcode)
+        if let plistString = Bundle.main.object(forInfoDictionaryKey: "SkilldAPIBaseURL") as? String,
+           let url = URL(string: plistString) {
             return url
         }
-        return URL(string: defaultBaseURL)!
-    }
+        // 3. Hardcoded default — http for localhost (ATS exception in Info.plist)
+        return URL(string: "http://localhost:8000")!
+    }()
 
-    /// Request timeout in seconds.
-    static let timeoutInterval: TimeInterval = 10
+    // MARK: - Networking constants
 
-    // MARK: - GitHub domain allowlist (for install downloads)
+    /// URLSession timeout for all API calls.
+    static let requestTimeout: TimeInterval = 10
 
-    /// Only these hosts are allowed for downloading skill content.
+    /// Milliseconds to debounce search input before firing an API call.
+    static let searchDebounceMsec: Int = 300
+
+    // MARK: - GitHub download constants
+
+    /// Allowed hosts for skill content downloads. Any redirect to another
+    /// host is rejected before the response is processed.
     static let allowedGitHubHosts: Set<String> = [
         "github.com",
         "api.github.com",
         "codeload.github.com",
     ]
+
+    /// Maximum uncompressed size of a skill folder (5 MB).
+    static let maxSkillSizeBytes: Int = 5 * 1_024 * 1_024
+
+    /// Maximum number of files inside a skill folder.
+    static let maxSkillFileCount: Int = 100
 }

@@ -60,6 +60,16 @@ targets:
         NSPrincipalClass: NSApplication
         LSUIElement: YES
         NSHighResolutionCapable: YES
+        # Backend base URL — override per build configuration for staging/production.
+        # Dev default (http://localhost:8000) is baked into APIConfig.swift.
+        # Set to production URL here when you have a domain:
+        # SkilldAPIBaseURL: "https://api.skilld.sh"
+        #
+        # App Transport Security: allow http://localhost for dev (see Info.plist).
+        NSAppTransportSecurity:
+          NSExceptionDomains:
+            localhost:
+              NSExceptionAllowsInsecureHTTPLoads: true
 
   # ── Unit tests ─────────────────────────────────────────────────────────────
   skilldTests:
