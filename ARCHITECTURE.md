@@ -1,6 +1,7 @@
 # ARCHITECTURE — skilld
 
 ## Overview
+
 Three client-facing surfaces share one backend:
 
 ```
@@ -20,6 +21,7 @@ dumb and swappable, and so scraping/rate-limits live in one place.
 ## Components
 
 ### apps/backend (FastAPI)
+
 - Owns the skill index. Source of truth for search.
 - Endpoints (v1):
   - `GET /health`
@@ -39,6 +41,7 @@ dumb and swappable, and so scraping/rate-limits live in one place.
   trigger a live scrape.
 
 ### apps/menubar (SwiftUI, macOS)
+
 - Calls backend `/skills` to list/search and `/skills/updated-since` to check
   for updates on installed skills. Falls back to a bundled `skills.json` when
   the backend is unreachable, with an "offline" banner in the UI.
@@ -63,12 +66,13 @@ dumb and swappable, and so scraping/rate-limits live in one place.
   NSStatusItem + filesystem writes need native hooks.
 
 New files added in this phase:
-  `APIConfig.swift`        — base URL constant, overridable via Info.plist / env
-  `APIError.swift`         — typed error enum (offline, timeout, serverError, decodingError)
-  `SkillsAPIClient.swift`  — URLSession-based client for /skills endpoints
-  `GitHubDownloader.swift` — download, extract, validate, and atomically install from GitHub
+`APIConfig.swift` — base URL constant, overridable via Info.plist / env
+`APIError.swift` — typed error enum (offline, timeout, serverError, decodingError)
+`SkillsAPIClient.swift` — URLSession-based client for /skills endpoints
+`GitHubDownloader.swift` — download, extract, validate, and atomically install from GitHub
 
 ### apps/extension (TypeScript, Manifest V3)
+
 - Content script per site (`claude.ai`, `chatgpt.com`) — separate
   selector configs per site since DOM structures differ and drift
   independently.
@@ -82,6 +86,7 @@ New files added in this phase:
   sends draft text to our backend unless user opts into BYO API key mode.
 
 ### packages/shared-types
+
 - TypeScript interfaces for `SkillSummary`, `SkillDetail`,
   `SkillSearchResponse`, `SkillSearchParams` — field-for-field match with
   backend Pydantic models, so extension and any future TS surface share one
@@ -115,8 +120,10 @@ Indexes:
 ```
 
 ## Local dev
+
 `apps/backend/docker-compose.yml` spins up Postgres + Redis + API together.
 Run the scraper separately with:
+
 ```
 docker compose --profile scraper run scraper
 # or locally:
@@ -127,6 +134,7 @@ Menubar and extension point at `localhost` backend during dev via `.env` /
 config, at a real deployed URL in production.
 
 ## Explicit decisions (revisit if wrong)
+
 - Keyword/full-text search before embeddings — validate need first.
 - On-device prompt clarifier before server-side — privacy-first default
   for a dev-tool audience.
