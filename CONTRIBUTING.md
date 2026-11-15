@@ -11,5 +11,5 @@ Thank you for your interest in contributing to skilld!
 
 ## Getting Started
 
-Please refer to the `README.md` in each respective app for local development instructions. 
+Please refer to the `README.md` in each respective app for local development instructions.
 Make sure to read `AGENTS.md` for AI agent rules.
