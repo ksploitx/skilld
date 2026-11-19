@@ -5,7 +5,6 @@ Run locally:
     uvicorn app.main:app --reload
 """
 from fastapi import FastAPI
-
 from app.api.skills import router as skills_router
 
 app = FastAPI(
