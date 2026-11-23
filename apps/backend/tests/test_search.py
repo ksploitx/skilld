@@ -29,7 +29,7 @@ from app.models import Skill
 
 # Helper: run a full-text search and return ordered skill names
 async def fts_search(session, query: str, limit: int = 5) -> list[str]:
-    tsq = func.plainto_tsquery("english", query)
+    tsq = func.plainto_tsquery("pg_catalog.english", query)
     stmt = (
         select(Skill)
         .where(Skill.search_vector.op("@@")(tsq))

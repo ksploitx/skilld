@@ -94,6 +94,10 @@ def _make_mock_client(responses: dict[str, tuple[int, str | dict]]):
     """
     Build an httpx.AsyncClient mock where each URL maps to (status, body).
     body can be a str (raw text) or dict (JSON).
+
+    Note: no spec= here — speccing against httpx.AsyncClient inside a
+    patch block fails on Python 3.12 because the class has already been
+    replaced by a MagicMock at that point.
     """
     async def mock_get(url, **kwargs):
         if url in responses:
@@ -107,7 +111,7 @@ def _make_mock_client(responses: dict[str, tuple[int, str | dict]]):
             return httpx.Response(status, content=content, headers=headers)
         return httpx.Response(404, content=b"Not found")
 
-    client = AsyncMock(spec=httpx.AsyncClient)
+    client = MagicMock()
     client.get = mock_get
     client.__aenter__ = AsyncMock(return_value=client)
     client.__aexit__ = AsyncMock(return_value=False)

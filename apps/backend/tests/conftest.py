@@ -53,7 +53,7 @@ def _test_db_url() -> str:
         "TEST_DATABASE_URL",
         os.getenv(
             "DATABASE_URL",
-            "postgresql+asyncpg://postgres:postgres@localhost:5432/skilld",
+            "postgresql+asyncpg://postgres:postgres@localhost:5433/skilld",
         ),
     )
     # Replace the database name with "skilld_test"
@@ -80,16 +80,14 @@ async def _postgres_available(url: str) -> bool:
 
 @pytest.fixture(scope="session")
 def postgres_available() -> bool:
-    return asyncio.get_event_loop().run_until_complete(
-        _postgres_available(TEST_DB_URL)
-    )
+    return asyncio.run(_postgres_available(TEST_DB_URL))
 
 
 # ---------------------------------------------------------------------------
 # Session-scoped engine + per-test transactional session
 # ---------------------------------------------------------------------------
 
-@pytest_asyncio.fixture(scope="session")
+@pytest_asyncio.fixture(loop_scope="session", scope="session")
 async def db_engine(postgres_available):
     if not postgres_available:
         pytest.skip("Postgres not reachable — skipping DB-backed tests")
@@ -101,7 +99,7 @@ async def db_engine(postgres_available):
     await engine.dispose()
 
 
-@pytest_asyncio.fixture
+@pytest_asyncio.fixture(loop_scope="session")
 async def db_session(db_engine) -> AsyncSession:
     """Each test gets its own session; changes are rolled back after."""
     factory = async_sessionmaker(db_engine, class_=AsyncSession, expire_on_commit=False)
@@ -114,7 +112,7 @@ async def db_session(db_engine) -> AsyncSession:
 # FastAPI test client wired to the test DB
 # ---------------------------------------------------------------------------
 
-@pytest_asyncio.fixture
+@pytest_asyncio.fixture(loop_scope="session")
 async def test_client(db_session: AsyncSession) -> AsyncClient:
     """HTTPX async client pointed at the test FastAPI app."""
     async def override_get_db():
