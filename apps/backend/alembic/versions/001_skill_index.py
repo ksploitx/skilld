@@ -19,11 +19,16 @@ def upgrade() -> None:
     # 1. Enable pgcrypto for gen_random_uuid() (no-op if already installed)
     op.execute("CREATE EXTENSION IF NOT EXISTS pgcrypto")
 
-    # 2. Create source enum
-    skill_source_enum = postgresql.ENUM(
-        "github", "skills_sh", name="skillsource", create_type=True
-    )
-    skill_source_enum.create(op.get_bind(), checkfirst=True)
+    # 2. Create source enum (idempotent — PL/pgSQL handles already-exists gracefully)
+    op.execute(sa.text(
+        """
+        DO $$ BEGIN
+            CREATE TYPE skillsource AS ENUM ('github', 'skills_sh');
+        EXCEPTION
+            WHEN duplicate_object THEN NULL;
+        END $$;
+        """
+    ))
 
     # 3. Create skills table (without the generated column first)
     op.create_table(
@@ -48,7 +53,7 @@ def upgrade() -> None:
         sa.Column("content_hash", sa.Text, nullable=False),
         sa.Column(
             "source",
-            sa.Enum("github", "skills_sh", name="skillsource"),
+            sa.Enum("github", "skills_sh", name="skillsource", create_type=False),
             nullable=False,
         ),
         sa.Column("source_url", sa.Text, nullable=False),
@@ -75,10 +80,9 @@ def upgrade() -> None:
         """
         ALTER TABLE skills ADD COLUMN search_vector TSVECTOR
         GENERATED ALWAYS AS (
-            setweight(to_tsvector('english', coalesce(name, '')), 'A') ||
-            setweight(to_tsvector('english', coalesce(description, '')), 'B') ||
-            setweight(to_tsvector('english', coalesce(array_to_string(tags, ' '), '')), 'C') ||
-            setweight(to_tsvector('english', coalesce(skill_md, '')), 'D')
+            setweight(to_tsvector('pg_catalog.english'::regconfig, coalesce(name, '')), 'A') ||
+            setweight(to_tsvector('pg_catalog.english'::regconfig, coalesce(description, '')), 'B') ||
+            setweight(to_tsvector('pg_catalog.english'::regconfig, coalesce(skill_md, '')), 'D')
         ) STORED
         """
     )
