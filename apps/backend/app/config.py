@@ -12,7 +12,7 @@ class Settings(BaseSettings):
 
     # Postgres
     database_url: str = (
-        "postgresql+asyncpg://postgres:postgres@localhost:5432/skilld"
+        "postgresql+asyncpg://postgres:postgres@localhost:5433/skilld"
     )
 
     # Redis

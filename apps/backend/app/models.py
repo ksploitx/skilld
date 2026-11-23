@@ -25,6 +25,7 @@ from sqlalchemy import (
     Index,
     Text,
     Computed,
+    text as sa_text,
 )
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.types import UserDefinedType
@@ -54,7 +55,7 @@ class Skill(Base):
         UUID(as_uuid=True),
         primary_key=True,
         default=uuid.uuid4,
-        server_default="gen_random_uuid()",
+        server_default=sa_text("gen_random_uuid()"),
     )
 
     # ── content fields ───────────────────────────────────────────────────────
@@ -92,10 +93,9 @@ class Skill(Base):
         TSVector,
         Computed(
             """
-            setweight(to_tsvector('english', coalesce(name, '')), 'A') ||
-            setweight(to_tsvector('english', coalesce(description, '')), 'B') ||
-            setweight(to_tsvector('english', coalesce(array_to_string(tags, ' '), '')), 'C') ||
-            setweight(to_tsvector('english', coalesce(skill_md, '')), 'D')
+            setweight(to_tsvector('pg_catalog.english'::regconfig, coalesce(name, '')), 'A') ||
+            setweight(to_tsvector('pg_catalog.english'::regconfig, coalesce(description, '')), 'B') ||
+            setweight(to_tsvector('pg_catalog.english'::regconfig, coalesce(skill_md, '')), 'D')
             """,
             persisted=True,
         ),

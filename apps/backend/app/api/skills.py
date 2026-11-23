@@ -99,7 +99,7 @@ async def search_skills(
         stmt = stmt.where(Skill.tags.overlap(tags))  # type: ignore[attr-defined]
 
     if query:
-        tsquery = func.plainto_tsquery("english", query)
+        tsquery = func.plainto_tsquery("pg_catalog.english", query)
         stmt = (
             stmt.where(Skill.search_vector.op("@@")(tsquery))
             .order_by(func.ts_rank(Skill.search_vector, tsquery).desc())
